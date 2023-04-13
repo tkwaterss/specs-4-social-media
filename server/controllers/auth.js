@@ -25,7 +25,7 @@ module.exports = {
 
       //if user exists, can't register
       if (foundUser) {
-        res.sendStatus(400);
+        res.status(400).send('username already exists');
       } else {
         //creates bcrypt salt for generating a hash
         const salt = bcrypt.genSaltSync(10);

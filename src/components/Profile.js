@@ -1,6 +1,3 @@
-// YOU WILL BE INSTRUCTED WHEN YOU SHOULD 
-// UNCOMMENT THIS CODE
-
 import {useContext, useEffect, useState, useCallback} from 'react'
 import axios from 'axios'
 
