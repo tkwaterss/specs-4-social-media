@@ -19,6 +19,11 @@ const Auth = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
+    //!Add a validation of the username and passowrd here
+    // if (!username || !password) {
+    //   return alert('Please fill out both fields')
+    // }
+
     const body = {
       username,
       password,
@@ -31,7 +36,10 @@ const Auth = () => {
           authCtx.login(data.token, data.exp, data.userId);
           console.log("after auth", data);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err)
+          alert(`Sorry, there was an error with your registration. Error Message: ${err}`);
+        });
     } else {
       axios
         .post("http://localhost:4000/login", body)
@@ -39,7 +47,10 @@ const Auth = () => {
           authCtx.login(data.token, data.exp, data.userId);
           console.log("after auth", data);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err)
+          alert(`Sorry, there was a problem logging in. Error Message: ${err.response.data}`)
+        });
     }
 
     setUsername("");

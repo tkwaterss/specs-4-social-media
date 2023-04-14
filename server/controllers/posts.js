@@ -25,7 +25,7 @@ module.exports = {
     try {
       const { userId } = req.params;
       const posts = await Post.findAll({
-        where: { userId: userId },
+        where: { userId: +userId },
         include: [
           {
             model: User,
@@ -34,6 +34,7 @@ module.exports = {
           },
         ],
       });
+      res.status(200).send(posts);
     } catch (err) {
       console.log("error getting users posts");
       console.log(err);

@@ -1,6 +1,3 @@
-// YOU WILL BE INSTRUCTED WHEN YOU SHOULD 
-// UNCOMMENT THIS CODE
-
 import {useState, useEffect, useContext} from 'react'
 import axios from 'axios'
 
@@ -8,14 +5,14 @@ import AuthContext from '../store/authContext'
 
 const Home = () => {
     const {userId} = useContext(AuthContext)
-    console.log(userId)
     const [posts, setPosts] = useState([])
 
     useEffect(() => {
         axios.get('http://localhost:4000/posts')
         .then(res => {
+            console.log(userId)
             if (userId) {
-                const otherUsersPosts = res.data.filter(post => userId !== post.userId)
+                const otherUsersPosts = res.data.filter(post => +userId !== post.userId)
                 setPosts(otherUsersPosts)
             } else {
                 setPosts(res.data)

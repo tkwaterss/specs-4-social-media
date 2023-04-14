@@ -20,9 +20,14 @@ module.exports = {
     try {
       //destructuring the recieved registration credentials
       const { username, password } = req.body;
+
+      if(!username || !password) {
+        res.status(400).send('please fill out both fields');
+        return
+      }
+
       //boolean variable for if user already exists or not
       const foundUser = await User.findOne({ where: { username } });
-
       //if user exists, can't register
       if (foundUser) {
         res.status(400).send('username already exists');
@@ -65,6 +70,11 @@ module.exports = {
     try {
       const { username, password } = req.body;
       const foundUser = await User.findOne({ where: { username } });
+
+      if(!username || !password) {
+        res.status(400).send('please fill out both fields');
+        return
+      }
 
       if (foundUser) {
         const isAuthenticated = bcrypt.compareSync(
